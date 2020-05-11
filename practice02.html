@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>javascript연습문제02</title>
+    <script>
+        // 학생객체생성
+        var student = {
+            name: "홍길동",
+            ko: 0,
+            en: 0,
+            math: 0,
+            Score: function(ko, en, math){
+                var sum = ko + en + math;
+                var avg = sum / 3;
+                if(avg >= 90){
+                    return 'A';
+                } else if(avg >= 80){
+                    return 'B';
+                } else if(avg >= 70){
+                    return 'C';
+                } else {
+                    return 'D'
+                }
+                return 0;
+            }
+        }
+        console.log(student.name + ":" + student.Score(90, 80, 70) + "학점");
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

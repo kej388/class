@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQeury</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+  crossorigin="anonymous"></script>
+  
+    <script>
+        $(document).ready(function(){
+            $("#btn1").click(function(){
+                $("#box1").css("background", "#c6e4ff");
+                $("#box1").html("박스1");
+            });
+            $("#btn2").click(function(){
+                $("#box2").addClass("box2");
+            })
+            $("#btn3").click(function(){
+                $("#box2").removeClass("box2");
+            })
+            $("#btn4").click(function(){
+                $("img").attr("src", "images/math_img_2.jpg");
+            })
+            $("#btn5").click(function(){
+                $("#box1").addClass("on");
+            })
+            $("#btn6").on("click", function(){
+                $("#box3").addClass("box3");
+            })
+
+
+            $(".btn4").click(function(){
+			    $(".btn4").parent().next().css({"color":"#f00"});
+            });
+
+            $(".btn5").on({
+                    "mouseover focus": function() {
+                        $(".btn5").parent().next().css({"color":"#0f0"});
+                    }
+            });
+
+            $(".btn4").click();   // click 이벤트 함수호출
+            $(".btn5").trigger("mouseover");	// trigger함수호출. 이벤트이름지정
+
+            $(".btn6").on("click", function(e){
+                e.preventDefault();     //다른페이지로 이동하는 것을 막는다.
+                $(".txt1").css("color", "#ff006a");
+            })
+
+            var count = 0;
+            $(window).on("scroll", function(){
+                // console.log($(this).scrollTop());
+                
+                if($(this).scrollTop() > 700){
+                    $("#box3").addClass("bounceInLeft animated");
+                    if(count == 0) {
+                        $("#box4").append("<button id='btn8'>클릭8</button>");
+                        count++;
+                    }
+                    
+                }
+            })
+
+            $(".btn7").hover(function(){
+                $(".txt2").css("background", "#dd2345");
+            }, function(){
+                $(".txt2").css("background", "none");
+            })
+
+            $(document).on("keydown", keyEventFnc);
+            function keyEventFnc(e){
+                var direct = "";
+                switch(e.keyCode){
+                    case 37:
+                        direct = "LEFt";
+                        break;
+                    case 38:
+                        direct = "TOP";
+                        break;
+                    case 39:
+                        direct = "RIGHT";
+                        break;
+                    case 40:
+                        direct = "BOTTOM";
+                        break;
+                }
+                if(direct) {
+                    $("#user_id").val(direct);
+                }
+            }
+
+            //위임
+            // $("#box4").on("click", "#btn8", function(){
+            //     alert("btn8클릭됨");
+            // })
+
+            $("#box4").delegate("#btn8", "click", function(){
+                alert("btn8클릭됨");
+            })
+
+            $("#btn9").one("click", function(){
+                console.log("버튼 9가 클릭됨");
+            })
+        })
+    </script>
+    <link rel="stylesheet" href="css/animate.css">
+    <style>
+        #box1{
+            width: 300px; height: 300px; background: #ff006a;
+            position: relative;
+            transition: 1s;
+            left:0;
+        }
+        #box1.on{
+            left:50px;
+        }
+        #box2{
+            width: 100px; height: 300px; background: #caffc5;
+        }
+        .box2{
+            background:#ffecc8 !important;
+        }
+        #box3{
+            width: 100px; height: 100px; background: #fff0c5;
+            opacity: 1;
+        }
+        .box3{
+            opacity: 0 !important;
+        }
+        body{
+            height: 10000px;
+        }
+    </style>
+</head>
+<body>
+    <div id="box1">box1</div>
+    <button type="button" id="btn1">클릭</button>
+    <button type="button" id="btn5">클릭</button>
+    <div id="box2">box2</div>
+    <button type="button" id="btn2">클릭</button>
+    <button type="button" id="btn3">클릭</button>
+    <div>
+        <img src="images/math_img_1.jpg" alt="가위이미지">
+    </div>
+    <button type="button" id="btn4">클릭</button>
+    <div id="box3">box3</div>
+    <button type="button" id="btn6">클릭</button>
+
+    <p>
+    <button class="btn4">버튼4</button>
+    </p>
+    <p>내용1</p>
+    <p>
+        <button class="btn5">버튼5</button>
+    </p>
+    <p>내용2</p>
+
+    <p><a href="http://www.easyspub.co.kr/" class="btn6">버튼1</a></p>
+    <p class="txt1">내용1</p>
+    
+    <p><button class="btn7">hover</button></p>
+    <p class="txt2">내용1</p>
+    
+    <p><input type="text" name="user_id" id="user_id"></p>
+
+    <div id="box4"></div>
+    <button id="btn9">클릭9</button>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<style>
+    li{list-style: none;}    
+</style>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script>
+function setKeyword(address){
+    
+    document.form1.address.value=address;
+    document.getElementById("txtHint").style.display="none";
+    // 검색작업 코딩...
+}    
+    
+function showHint(str) {
+    // console.log(str.length);
+    if (str.length == 0) { 
+        document.getElementById("txtHint").innerHTML = "";
+        return;
+    } else {
+            var output="<ul>";
+            var address;
+            var zipcode;
+        
+            $.getJSON("practice05.php?q="+encodeURI(str),function(data){
+                console.log("test");
+                $.each(data,function(key,value){
+                    
+                    address = value.address;
+                    zipcode = value.zipcode;
+
+                    output += "<li><a href='#' onClick='setKeyword(\"" + address + "\")'>" + address + ", " + zipcode + "</a></li>";
+                    
+                });
+                
+                 output+="</ul>";
+                    
+                 $("#txtHint").show();
+                 $("#txtHint").html(output); 
+            });
+            
+    }
+}
+    
+$(document).ready(function(){
+      $("#search").keyup(function(){
+          showHint($(this).val());
+      });
+});
+    
+    
+</script>
+</head>
+<body>
+
+
+<form name="form1"> 
+    <input type="text" id="search" name="address" placeholder="검색어를 입력하세요" onkeyup="showHint(this.value)">
+</form>
+<div id="txtHint" style="display:none;"></div>
+</body>
+</html>

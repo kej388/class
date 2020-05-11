@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>javascript연습문제01</title>
+    <script>
+        function check(){
+            var str = document.form1.search1.value;
+            console.log(str);
+            location.href = `http://book.naver.com/search/search.nhn?sm=sta_hty.book&sug=&where=nexearch&query=${str}`;
+        }
+        
+
+    </script>
+</head>
+<body>
+    <form  name="form1" method="GET">
+        <input type="text" name="search1">
+        <button type="button" onclick="check();" value="검색" >검색</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>slider</title>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <style>
+        .animation_canvas  {
+                overflow:hidden;
+                position:relative;           
+                width:600px; height:400px;
+            }
+
+        /* Slider Panel */
+
+        .slider_panel { width:3000px; position:relative; }
+        .slider_image { float:left; width:600px; height:400px; }
+
+        /* Control Panel */
+
+        .control_panel  {
+            position:absolute; 
+            bottom:10px;
+            left:270px;
+            overflow:hidden; 
+            color:white;
+        }
+
+        .arrow_panel {
+            position: absolute;
+            width: 100%;
+            color: white;
+            top: 45%;
+           
+        }
+        .arrow_panel > span:first-child {
+            display:block;
+            margin-left: 10px;
+            font-size: 2em;   
+            float: left;
+            cursor: pointer;
+        }
+        .arrow_panel > span:last-child {
+            display:block;
+            float: right;
+            margin-right: 10px;
+            font-size: 2em; 
+            cursor: pointer; 
+        }
+
+        .dot{
+            font-size:30px;
+            cursor:pointer;
+        }
+
+        .on {
+            color: #d39625
+        }
+    </style>
+
+    <script>
+        $(document).ready(function () {
+            // 슬라이더를 움직여주는 함수
+            var slideCount = $('.slider_panel img').length; // 
+            function moveSlider(index){
+                var willMoveLeft = -(index * 600);
+                $('.slider_panel').animate({ left: willMoveLeft }, 'slow');
+            };
+
+            $(".dot").click(function(){
+                $(".control_panel").children().removeClass("on");
+                $(this).addClass("on");
+                moveSlider($(this).index()); 
+            });
+
+            $('.slider_panel img:last-child').prependTo('.slider_panel');
+
+            var index = 0;
+            function moveLeft() {
+            
+                $('.slider_panel').animate({
+                left: + 600
+                }, 200, function () {
+                    $('.slider_panel img:last-child').prependTo('.slider_panel');
+                    $('.slider_panel').css('left', '');
+                });
+                
+            };
+
+            function moveRight() {
+            
+                $('.slider_panel').animate({
+                    left: - 600
+                }, 200, function () {
+                    $('.slider_panel img:first-child').appendTo('.slider_panel');
+                    $('.slider_panel').css('left', '');
+                });
+                
+            };
+            $('.arrow_panel #left').click(function () {
+           
+                stop();
+                
+                index--;
+                if(index<0){
+                    index=$(".dot").length-1;
+                }
+                console.log(index);
+                moveLeft();
+                $(".dot").removeClass("active");
+                $(".dot").eq(index).addClass("active");            
+                
+            });
+
+            $('.arrow_panel #right').click(function () {
+            
+                stop();
+                
+                index++;
+                if(index>=$(".dot").length){
+                    index=0;
+                }
+    //            console.log(index);
+                moveRight();
+                $(".dot").removeClass("active");
+                $(".dot").eq(index).addClass("active");            
+            
+            });
+            
+        });
+    </script>
+</head>
+<body>
+   <div class="animation_canvas">
+        <div class="slider_panel">
+            <img src="images/pic01.jpg" class="slider_image"/>
+            <img src="images/pic02.jpg" class="slider_image"/>
+            <img src="images/pic03.jpg" class="slider_image"/>
+            <img src="images/pic04.jpg" class="slider_image"/>
+            <img src="images/pic05.jpg" class="slider_image"/>
+        </div>
+
+        <div class="control_panel" style="text-align:center">
+          <span class="dot on">*</span> 
+          <span class="dot">*</span> 
+          <span class="dot">*</span> 
+          <span class="dot">*</span>
+          <span class="dot">*</span>
+        </div>
+
+        <div class="arrow_panel">
+            <span id="left">&lt</span>
+            <span id="right">&gt</span>
+        </div>
+    </div>
+</body>
+</html>

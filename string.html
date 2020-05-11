@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>String</title>
+    <script>
+        var fileName = new String("a.b.c.txt");
+        document.write(fileName + "<br>");
+        document.write(fileName.lastIndexOf("."));
+
+        var lastDotPosition = fileName.lastIndexOf(".");
+        document.write(fileName.substr(lastDotPosition+1));
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

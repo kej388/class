@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajax</title>
+    <script
+  src="https://code.jquery.com/jquery-3.5.1.js"
+  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+  crossorigin="anonymous"></script>
+    <script>
+        $(function(){
+            $.ajax({
+                url:"ajaxDB.php",
+                dataType:"xml",
+                success:function(data){
+                    var $data = $(data).find("product");
+                    if($data.length > 0){
+                        var tb = $("<table />"); // table생성
+                        $.each($data, function(i, o) {
+                            var $name = $(o).find("name").text();
+                            var $price = $(o).find("price").text();
+                            // tr생성.td추가
+                            var row = $("<tr />").append(
+                                $("<td />").text($name),
+                                $("<td />").text($price)
+                            );
+                            // table에 row추가
+                            tb.append(row);
+                        });
+                        //.wrap에 table추가
+                        $(".wrap").append(tb);
+                    }
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="wrap"></div>
+</body>
+</html>

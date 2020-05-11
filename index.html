@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/example.js"></script>
+</head>
+<body>
+    <script>
+       var today = new Date();
+       var nowMonth = today.getMonth();
+            nowDate = today.getDate();
+            nowDay = today.getDay();
+
+        document.write("<h1>오늘 날짜 정보</h1>");
+        document.write("현재 월: " + (nowMonth+1), "<br>");
+        document.write("현재 일: " + nowDate, "<br>");
+        document.write("현재 요일: " + nowDay, "<br>");
+
+        var worldcup = new Date(2002, 4, 31);
+        var theMonth = worldcup.getMonth();
+            theDate = worldcup.getDate();
+            theDay = worldcup.getDay();
+
+        document.write("<h1>월드컵 날짜 정보<h1>");
+        document.write("2002월드컵 몇 월 : " + theMonth, "<br>");
+        document.write("2002월드컵 몇 일 : " + theDate, "<br>");
+        document.write("2002월드컵 몇 요일 : " + theDay, "<br>");
+        var num = 2.1234;
+
+	var maxNum = Math.max(10, 5, 8, 30),
+		minNum = Math.min(10, 5, 8, 30),
+		roundNum = Math.round(num),
+		floorNum = Math.floor(num),
+		ceilNum = Math.ceil(num),
+		rndNum = Math.random( ),
+        piNum = Math.PI;
+
+        document.write(maxNum, "<br>");
+        document.write(minNum, "<br>");
+        document.write(roundNum, "<br>");
+        document.write(floorNum, "<br>");
+        document.write(ceilNum, "<br>");
+        document.write(rndNum, "<br>");
+        document.write(piNum, "<br>");
+    </script>
+</body>
+</html>
+
